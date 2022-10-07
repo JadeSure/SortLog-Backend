@@ -15,7 +15,6 @@ pipeline {
         {
             steps{
              sh "yarn build"
-             sh 'ls -la ./out'
              }
         } 
     }
