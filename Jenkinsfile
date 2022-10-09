@@ -2,6 +2,7 @@ pipeline {
      agent any
      
         //Install denpendencies 
+         // old iron 666
     stages{
         stage('Install dependency')
         {
