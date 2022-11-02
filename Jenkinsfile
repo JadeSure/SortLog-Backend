@@ -1,5 +1,12 @@
 pipeline {
      agent any
+
+        environment{
+            CI ='true'
+            AWS_CRED        = 'AWS_sortlog' //Change to yours
+            AWS_REGION      = 'ap-southeast-2'
+        }
+
      
         //Install denpendencies 
     stages{
