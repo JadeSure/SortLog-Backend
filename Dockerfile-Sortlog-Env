@@ -12,4 +12,9 @@ COPY --from=node /usr/local/bin /usr/local/bin
 
 RUN apk add --no-cache aws-cli
 
+# Setup users and groups
+RUN groupadd -g ${JENKINSGID} jenkins
+RUN groupmod -g ${DOCKERGID} docker
+RUN useradd -c "Jenkins user" -g ${JENKINSGID} -G ${DOCKERGID} -M -N -u ${JENKINSUID} jenkins
+
 EXPOSE 8090
