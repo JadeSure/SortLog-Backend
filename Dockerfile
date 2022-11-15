@@ -1,16 +1,30 @@
-# Install dependencies only when needed
-FROM node:16-alpine 
-#Next we create a directory to hold the application code inside the image
+FROM node:16-alpine
+
 WORKDIR /app
-# Install dependencies based on the preferred package manager
-COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 
-
-RUN yarn install
-#To bundle your app's source code inside the Docker image, use the COPY instruction:
 COPY . .
-# should I have yarn build at this stagge ?
 
-RUN ls -a
+RUN yarn install && yarn build
 
-CMD ["node", "dist/server.js"]
+EXPOSE 4000
+
+ENV MONGO_URL=mongodb+srv://admin:admin@sortlog-dev.tz5kdhn.mongodb.net/sortlog-dev
+ENV auth_encryption_salt=some-salt
+ENV PORT=4000
+
+CMD ["yarn", "start"]
+
+# From node:16-alpine
+
+# WORKDIR /app
+# # COPY --from=0 ["node_modules", "dist", "./"]
+# COPY --from=0 /app/node_modules .
+# COPY --from=0 /app/dist .
+# COPY --from=0 /app/package.json .
+
+# ENV MONGO_URL=mongodb+srv://admin:admin@sortlog-dev.tz5kdhn.mongodb.net/sortlog-dev
+# ENV auth_encryption_salt=some-salt
+# ENV PORT=4000
+
+
+# CMD ["yarn", "start"]
