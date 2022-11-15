@@ -21,7 +21,7 @@
 
 
 # Dockerfile.jenkinsAgent
-FROM debian:bookworm-backports
+FROM bullseye:11
 ARG JENKINSUID
 ARG JENKINSGID
 ARG DOCKERGID
