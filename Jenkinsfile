@@ -41,7 +41,8 @@ pipeline {
                     agent {
                         dockerfile {
                             filename 'Dockerfile-Sortlog-Env'
-                            additionalBuildArgs '--build-arg UID=$(id -u) --build-arg GID=$(id -g)  --build-arg UNAME=jenkins'
+                            additionalBuildArgs  '--build-arg JENKINSUID=`id -u jenkins` --build-arg JENKINSGID=`id -g jenkins` --build-arg DOCKERGID=`stat -c %g /var/run/docker.sock`'
+                            args '-v /var/run/docker.sock:/var/run/docker.sock -u jenkins:docker'
                         }
                     }
 
