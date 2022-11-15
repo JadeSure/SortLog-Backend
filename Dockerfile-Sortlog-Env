@@ -25,7 +25,6 @@ FROM debian:stretch-backports
 ARG JENKINSUID
 ARG JENKINSGID
 ARG DOCKERGID
-...
 # Install Docker in the image, which adds a docker group
 RUN apt-get -y update && \
  apt-get -y install \
@@ -48,7 +47,6 @@ RUN apt-get -y update && \
    docker-ce-cli \
    containerd.io
 
-...
 # Setup users and groups
 RUN groupadd -g ${JENKINSGID} jenkins
 RUN groupmod -g ${DOCKERGID} docker
