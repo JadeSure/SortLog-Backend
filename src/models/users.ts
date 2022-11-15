@@ -1,30 +1,28 @@
-import mongoose = require("mongoose");
+import mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema(
   {
     email: {
       type: String,
       required: true,
-      unique: true
+      unique: true,
     },
     name: {
       type: String,
-      required: true
+      required: true,
     },
     photoUrl: {
       type: String,
     },
     provider: {
       type: String,
-      required: true
+      required: true,
     },
     contactType: {
       type: String,
-      required: true
     },
     phone: {
       type: String,
-      required: true
     },
   },
   {
@@ -32,8 +30,5 @@ const UserSchema = new mongoose.Schema(
   }
 );
 
-// module.exports = mongoose.model('User', UserSchema);
-const User = mongoose.model('User', UserSchema);
-// contactType: String
-// phone: String
-export default User
+const User = mongoose.model('users', UserSchema);
+export default User;
