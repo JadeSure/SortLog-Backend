@@ -40,7 +40,7 @@ pipeline {
                 stage ('Docker Build'){
                     agent {
                         docker {
-                            image 'Dockerfile-Sortlog-Env'
+                            filename 'Dockerfile-Sortlog-Env'
                             additionalBuildArgs '--build-arg UID=$(id -u) --build-arg GID=$(id -g)  --build-arg UNAME=jenkins'
                         }
                     }
