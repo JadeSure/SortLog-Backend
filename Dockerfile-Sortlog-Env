@@ -21,7 +21,7 @@
 
 
 # Dockerfile.jenkinsAgent
-FROM lts-bullseye-slim
+FROM debian:11
 ARG JENKINSUID
 ARG JENKINSGID
 ARG DOCKERGID
