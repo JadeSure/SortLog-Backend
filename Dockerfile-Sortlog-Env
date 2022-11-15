@@ -48,7 +48,7 @@ ARG DOCKERGID
 #    containerd.io
 
 RUN apt-get -y update && \
-    apt-get install \
+    apt-get -y install \
     ca-certificates \
     curl \
     gnupg \
