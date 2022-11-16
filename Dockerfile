@@ -2,9 +2,12 @@ FROM node:16-alpine
 
 WORKDIR /app
 
+VOLUME /data
+
 COPY . .
 
 RUN yarn install && yarn build
+RUN ["cp", "package.json", "./data"]
 
 EXPOSE 4000
 
@@ -12,7 +15,8 @@ ENV MONGO_URL=mongodb+srv://admin:admin@sortlog-dev.tz5kdhn.mongodb.net/sortlog-
 ENV auth_encryption_salt=some-salt
 ENV PORT=4000
 
-CMD ["yarn", "start"]
+# CMD ["cp", "package.json", "data/"]
+CMD ["touch", "./data/likui"]
 
 # From node:16-alpine
 
