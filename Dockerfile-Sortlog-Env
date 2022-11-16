@@ -26,11 +26,6 @@ ARG JENKINSUID
 ARG JENKINSGID
 ARG DOCKERGID
 
-# Setup users and groups
-RUN groupadd -g ${JENKINSGID} jenkins
-RUN groupmod -g ${DOCKERGID} docker
-RUN useradd -c "Jenkins user" -g ${JENKINSGID} -G ${DOCKERGID} -M -N -u ${JENKINSUID} jenkins
-
 RUN apt-get -y update && \
     apt-get -y install \
     ca-certificates \
@@ -45,6 +40,11 @@ RUN mkdir -p /etc/apt/keyrings && curl -fsSL https://download.docker.com/linux/d
 
 RUN apt-get -y update && \
     apt-get -y install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+
+# Setup users and groups
+RUN groupadd -g ${JENKINSGID} jenkins
+RUN groupmod -g ${DOCKERGID} docker
+RUN useradd -c "Jenkins user" -g ${JENKINSGID} -G ${DOCKERGID} -M -N -u ${JENKINSUID} jenkins
 
 RUN apt update && \
     curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
