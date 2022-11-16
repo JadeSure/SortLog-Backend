@@ -57,13 +57,14 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2
     unzip awscliv2.zip && \
     ./aws/install
 
-RUN apt-get istall pass && \ 
-    wget https://github.com/docker/docker-credential-helpers/releases/download/v0.6.0/docker-credential-pass-v0.6.0-amd64.tar.gz && \ 
-    tar -xf docker-credential-pass-v0.6.0-amd64.tar.gz && \ 
-    chmod +x docker-credential-pass && \
-    mv docker-credential-pass /usr/local/bin/ && \
-    gpg2 --gen-key && \
-    pass init "jenkis" && \
-    sed -i '0,/{/s/{/{\n\t"credsStore": "pass",/' ~/.docker/config.json
+RUN mkdir 
+# RUN apt-get istall pass && \ 
+#     wget https://github.com/docker/docker-credential-helpers/releases/download/v0.6.0/docker-credential-pass-v0.6.0-amd64.tar.gz && \ 
+#     tar -xf docker-credential-pass-v0.6.0-amd64.tar.gz && \ 
+#     chmod +x docker-credential-pass && \
+#     mv docker-credential-pass /usr/local/bin/ && \
+#     gpg2 --gen-key && \
+#     pass init "jenkis" && \
+#     sed -i '0,/{/s/{/{\n\t"credsStore": "pass",/' ~/.docker/config.json
 
 # Setup users and groups
