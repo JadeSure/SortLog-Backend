@@ -2,12 +2,11 @@ FROM node:16-alpine
 
 WORKDIR /app
 
-VOLUME /data
+# VOLUME /data
 
 COPY . .
 
 RUN yarn install && yarn build
-RUN ["cp", "package.json", "./data"]
 
 EXPOSE 4000
 
@@ -16,7 +15,7 @@ ENV auth_encryption_salt=some-salt
 ENV PORT=4000
 
 # CMD ["cp", "package.json", "data/"]
-CMD ["touch", "./data/likui"]
+CMD yarn start
 
 # From node:16-alpine
 
