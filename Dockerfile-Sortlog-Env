@@ -35,8 +35,8 @@ RUN apt-get -y update && \
 
 RUN mkdir -p /etc/apt/keyrings && curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg \
     && echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
-  $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+    "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
+    $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 RUN apt-get -y update && \
     apt-get -y install docker-ce docker-ce-cli containerd.io docker-compose-plugin
@@ -44,6 +44,8 @@ RUN apt-get -y update && \
 RUN groupadd -g ${JENKINSGID} jenkins
 RUN groupmod -g ${DOCKERGID} docker
 RUN useradd -c "Jenkins user" -g ${JENKINSGID} -G ${DOCKERGID} -M -N -u ${JENKINSUID} jenkins
+
+RUN mkdir "/home/jenkins" && chown -R jenkins "/home/jenkins" 
 
 RUN apt update && \
     curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
@@ -57,13 +59,7 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2
     unzip awscliv2.zip && \
     ./aws/install
 
-# RUN apt-get istall pass && \ 
-#     wget https://github.com/docker/docker-credential-helpers/releases/download/v0.6.0/docker-credential-pass-v0.6.0-amd64.tar.gz && \ 
-#     tar -xf docker-credential-pass-v0.6.0-amd64.tar.gz && \ 
-#     chmod +x docker-credential-pass && \
-#     mv docker-credential-pass /usr/local/bin/ && \
-#     gpg2 --gen-key && \
-#     pass init "jenkis" && \
-#     sed -i '0,/{/s/{/{\n\t"credsStore": "pass",/' ~/.docker/config.json
 
-# Setup users and groups
+# RUN apt-get istall pass && \ 
+#     wget https://github.com/docker/docker-credential-helpers/releases/download/v0.6.0/docker-credential-pass-v0.6.0-amd64.tar.gz && \ 
+#     tar -xf docker-c
