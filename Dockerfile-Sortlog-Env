@@ -47,8 +47,8 @@ ARG DOCKERGID
 #     apt -y install nodejs
 
 # RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
-    unzip awscliv2.zip && \
-    ./aws/install
+#     unzip awscliv2.zip && \
+#     ./aws/install
 
 RUN groupadd -g ${JENKINSGID} jenkins
 RUN groupmod -g ${DOCKERGID} docker
