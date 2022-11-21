@@ -28,7 +28,7 @@ pipeline {
         }
 
         stage ('Docker Build Test') {
-            when {branch 'dev'}
+            when {branch 'main'}
             agent {
                 docker {
                     image 'node:16-alpine'
