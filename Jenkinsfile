@@ -15,18 +15,7 @@ pipeline {
         ECR_URL = "003374733998.dkr.ecr.ap-southeast-2.amazonaws.com"
     } 
 
-
-        //Install denpendencies 
     stages{
-        stage('Install dependency')
-        {
-            
-            steps{
-                echo "Installing packages"
-                sh 'yarn install' 
-            }     
-        }
-
         stage ('Docker Build Test') {
             when {branch 'main'}
             agent {
