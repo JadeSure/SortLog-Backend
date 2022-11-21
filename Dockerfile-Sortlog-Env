@@ -1,54 +1,8 @@
-# FROM node:16-alpine as node
-
-# FROM docker 
-
-# # VOLUME /var/run/docker.sock /var/run/docker.sock
-
-# COPY --from=node /usr/lib /usr/lib
-# COPY --from=node /usr/local/share /usr/local/share
-# COPY --from=node /usr/local/lib /usr/local/lib
-# COPY --from=node /usr/local/include /usr/local/include
-# COPY --from=node /usr/local/bin /usr/local/bin
-
-# RUN apk add --no-cache aws-cli
-
-# # Setup users and groups
-# RUN groupadd -g ${JENKINSGID} jenkins
-# RUN groupmod -g ${DOCKERGID} docker
-# RUN useradd -c "Jenkins user" -g ${JENKINSGID} -G ${DOCKERGID} -M -N -u ${JENKINSUID} jenkins
-
-# EXPOSE 8090
-
-
 # Dockerfile.jenkinsAgent
 FROM tremendousure/sortlog:latest
 ARG JENKINSUID
 ARG JENKINSGID
 ARG DOCKERGID
-
-# RUN apt-get -y update && \
-#     apt-get -y install \
-#     ca-certificates \
-#     curl \
-#     gnupg \
-#     lsb-release && \
-#     apt-get -y install zip
-
-# RUN mkdir -p /etc/apt/keyrings && curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg \
-#     && echo \
-#     "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
-#     $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
-
-# RUN apt-get -y update && \
-#     apt-get -y install docker-ce docker-ce-cli containerd.io docker-compose-plugin
-
-# RUN apt update && \
-#     curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
-#     apt -y install nodejs
-
-# RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
-#     unzip awscliv2.zip && \
-#     ./aws/install
 
 RUN groupadd -g ${JENKINSGID} jenkins
 RUN groupmod -g ${DOCKERGID} docker

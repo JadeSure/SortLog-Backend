@@ -1,7 +1,4 @@
 FROM debian:11
-# ARG JENKINSUID
-# ARG JENKINSGID
-# ARG DOCKERGID
 
 RUN apt-get -y update && \
     apt-get -y install \
@@ -26,9 +23,3 @@ RUN apt update && \
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
     unzip awscliv2.zip && \
     ./aws/install
-
-# RUN groupadd -g ${JENKINSGID} jenkins
-# RUN groupmod -g ${DOCKERGID} docker
-# RUN useradd -c "Jenkins user" -g ${JENKINSGID} -G ${DOCKERGID} -M -N -u ${JENKINSUID} jenkins
-
-# RUN mkdir -p "/home/jenkins" && chown -R jenkins "/home/jenkins" 

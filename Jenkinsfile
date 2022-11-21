@@ -22,22 +22,32 @@ pipeline {
         {
             
             steps{
-             echo "Installing packages"
-             sh 'yarn install' 
-             }     
+                echo "Installing packages"
+                sh 'yarn install' 
+            }     
         }
 
-        stage ('Test') {
+        stage ('Docker Build Test') {
+            when {branch 'dev'}
+            agent {
+                docker {
+                    image 'node:16-alpine'
+                }
+            }
+
             steps {
-                echo "Testing...."
-                sh 'yarn pre-commit'
+                script {
+                    echo "Testing...."
+                    sh "yarn install && yarn pre-commit"
+                }
+                
             }
         }
 
          stage('Build Docker Image and Image Updating to ECR'){
             when { anyOf { branch 'main'; branch 'dev' } }
             stages {
-                stage ('Docker Build'){
+                stage ('Docker Build & Upload Image to ECR'){
                     agent {
                         dockerfile {
                             filename 'Dockerfile-Sortlog-Env'
